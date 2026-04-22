@@ -106,7 +106,7 @@ To run the system locally for code review or testing:
 
 ---
 
-## ⚖️ Assumptions & Tradeoffs
+## ⚖️ Assumption & Tradeoff
 
 *   **Raw SQL over Alembic/ORM**: To keep the project extremely lightweight, fast, and reviewable, I opted out of heavy ORMs and migration tools (like Alembic). A single `init_db.py` script serves as the DDL source of truth.
 *   **Independent State Columns**: `payment_status` and `settlement_status` are tracked as two independent columns in the `transactions` table rather than a single linear `status` column. This intentionally allows the system to capture impossible states (e.g., failed payment + successful settlement) so they can be flagged by the discrepancy endpoint, rather than overwriting the previous status.
